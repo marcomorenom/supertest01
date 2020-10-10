@@ -9,16 +9,19 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.test.R
 
-class SimpleAdapter(private val context: Context, private var items: ArrayList<String>?): RecyclerView.Adapter<ViewHolder>() {
+class SimpleAdapter(private val context: Context, private var items: ArrayList<Any>?, private val listener : OnItemClicked): RecyclerView.Adapter<ViewHolder>() {
 
+    interface OnItemClicked{
+        fun onItemClicked(item : Any?)
+    }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         setDefaultContent(holder)
         items?.let { _items->
             if(_items.isNotEmpty()){
                 _items[position].let { item ->
-                    holder.title.text = item
-                    holder.subtitle.text = item
+                    holder.title.text = item as CharSequence?
+                    holder.subtitle.text = item as CharSequence?
                 }
             }
         }
@@ -29,14 +32,14 @@ class SimpleAdapter(private val context: Context, private var items: ArrayList<S
         holder.subtitle.text = context.getText(R.string.default_long_text_lorem_ipsum)
     }
 
-    fun updateData(items : ArrayList<String>?) {
+    fun updateData(items : ArrayList<Any>?) {
         if(items!=null){
             this.items = items
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_view_home, parent, false)
-        return ViewHolder(v)
+        return ViewHolder(v, this.listener)
     }
 
     override fun getItemCount(): Int {
@@ -47,7 +50,12 @@ class SimpleAdapter(private val context: Context, private var items: ArrayList<S
         return 0
     }}
 
- class ViewHolder(holder: View) : RecyclerView.ViewHolder(holder) {
+ class ViewHolder(holder: View, listener : SimpleAdapter.OnItemClicked) : RecyclerView.ViewHolder(holder) {
      var title: TextView = holder.findViewById(R.id.title)
      var subtitle: TextView = holder.findViewById(R.id.subtitle)
+     init {
+         holder.setOnClickListener {
+             listener.onItemClicked(null)
+         }
+     }
 }
