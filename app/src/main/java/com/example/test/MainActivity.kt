@@ -21,6 +21,7 @@ open class MainActivity : AppCompatActivity()
     override fun onStart() {
         super.onStart()
         initGlobalVariables()
+        initListeners()
     }
     override fun onResume() {
         super.onResume()
@@ -42,7 +43,7 @@ open class MainActivity : AppCompatActivity()
         Log.d(TAG_MainActivity,"initGlobalVariables")
         validUtils = Validations()
     }
-    private fun validateUser(){
+    open fun validateUser(){
         validUtils?.let { validations ->
             if(validations.isUserLogged()){
                 startApp(case = LOGIN_HOME_CASE)
@@ -86,7 +87,13 @@ open class MainActivity : AppCompatActivity()
     open fun logOut(){
 
     }
+    open fun initListeners() {}
     /** END LOGIC METHODS **/
 
+    /**
+     * VIEW METHODS
+     */
+    open fun showLoader(){}
+    open fun hideLoader(){}
 
 }
