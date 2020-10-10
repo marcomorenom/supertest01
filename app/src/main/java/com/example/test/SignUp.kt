@@ -7,9 +7,9 @@ import android.widget.EditText
 
 class SignUp : MainActivity() {
 
-    lateinit var userName: EditText;
+    lateinit var userName: EditText
     lateinit var pass: EditText
-    lateinit var signBtn: Button;
+    lateinit var signBtn: Button
     var isUserValidated = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
