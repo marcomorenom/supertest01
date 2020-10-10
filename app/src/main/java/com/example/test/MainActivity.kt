@@ -42,6 +42,7 @@ open class MainActivity : AppCompatActivity()
     open fun initGlobalVariables() {
         Log.d(TAG_MainActivity,"initGlobalVariables")
         validUtils = Validations()
+
     }
     open fun validateUser(){
         validUtils?.let { validations ->
