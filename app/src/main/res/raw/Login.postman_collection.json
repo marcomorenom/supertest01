@@ -1,0 +1,130 @@
+{
+	"info": {
+		"_postman_id": "6a08aef4-bcc2-4e90-8ae1-9eb0f348b7e5",
+		"name": "Login",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\" : \"test@postman.com\",\n    \"username\" : \"test001\",\n\t\"password\" : \"12345678\"\n\n}"
+				},
+				"url": {
+					"raw": "http://api-candidates-dev.us-west-2.elasticbeanstalk.com/users",
+					"protocol": "http",
+					"host": [
+						"api-candidates-dev",
+						"us-west-2",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\" : \"test@postman.com\",\n\t\"password\" : \"12345678\"\n\n}"
+				},
+				"url": {
+					"raw": "http://api-candidates-dev.us-west-2.elasticbeanstalk.com/login",
+					"protocol": "http",
+					"host": [
+						"api-candidates-dev",
+						"us-west-2",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api-candidates-dev.us-west-2.elasticbeanstalk.com/users",
+					"protocol": "http",
+					"host": [
+						"api-candidates-dev",
+						"us-west-2",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET User by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://api-candidates-dev.us-west-2.elasticbeanstalk.com/users/:id",
+					"protocol": "http",
+					"host": [
+						"api-candidates-dev",
+						"us-west-2",
+						"elasticbeanstalk",
+						"com"
+					],
+					"path": [
+						"users",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "5f82319921da9d3285478e92"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
