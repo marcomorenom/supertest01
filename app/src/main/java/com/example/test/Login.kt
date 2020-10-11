@@ -66,24 +66,30 @@ class Login : MainActivity() {
         }
         login.setOnClickListener {
             if(!isBusy){
-                showLoader()
-                if(validateInfo(showErrors = true)){
-                    login { user : UserRegisterModel? ->
-                        hideLoader()
-                        if(user!=null){
-                            Log.d(TAG, "register success!")
-                            saveUserOnPref(user)
-                            startActivity(Intent(applicationContext,Home::class.java))
-                            finishAffinity()
-                        }else{
-                            // show error!
-                            Toast.makeText(applicationContext,applicationContext.getText(R.string.login_error), Toast.LENGTH_SHORT).show()
-                            Log.e(TAG, "register failed!")
+                if(isOnline(applicationContext)){
+                    showLoader()
+                    if(validateInfo(showErrors = true)){
+                        login { user : UserRegisterModel? ->
+                            hideLoader()
+                            if(user!=null){
+                                Log.d(TAG, "register success!")
+                                saveUserOnPref(user)
+                                startActivity(Intent(applicationContext,Home::class.java))
+                                finishAffinity()
+                            }else{
+                                // show error!
+                                Toast.makeText(applicationContext,applicationContext.getText(R.string.login_error), Toast.LENGTH_SHORT).show()
+                                Log.e(TAG, "register failed!")
+                            }
                         }
+                    }else{
+                        hideLoader()
                     }
-                }else{
-                    hideLoader()
                 }
+                else{
+                    Toast.makeText(applicationContext,R.string.no_internet, Toast.LENGTH_SHORT).show()
+                }
+
             }
         }
     }

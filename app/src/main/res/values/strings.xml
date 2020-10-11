@@ -18,4 +18,5 @@
     <string name="login_error">Invalid credentials</string>
     <string name="sign_up_error">Can\'t create new user. Please check your information</string>
     <string name="invalid_email">Invalid email</string>
+    <string name="no_internet">Please, check your internet connecton</string>
 </resources>

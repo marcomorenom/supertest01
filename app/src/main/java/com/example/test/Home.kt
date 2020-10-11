@@ -2,12 +2,14 @@ package com.example.test
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.adapters.SimpleAdapter
 import com.example.models.UserItem
+import com.example.models.UserRegisterModel
 import com.example.repositories.HomeRepo
 import com.example.utils.CONTENT_KEY
 import com.google.gson.Gson
@@ -26,13 +28,21 @@ class Home : MainActivity(), SimpleAdapter.OnItemClicked {
 
     override fun onResume() {
         super.onResume()
-        HomeRepo(applicationContext.getString(R.string.SERVER_URL)).getUserList { list ->
-            if(!list.isNullOrEmpty()){
-                userList = list
-                updateRecycler()
-            }else {
-                Toast.makeText(applicationContext,applicationContext.getText(R.string.default_connection_error), Toast.LENGTH_SHORT).show()
+        if(isOnline(applicationContext)){
+            HomeRepo(applicationContext.getString(R.string.SERVER_URL)).getUserList { list ->
+                if(!list.isNullOrEmpty()){
+                    userList = list
+                    updateRecycler()
+                }else {
+                    Toast.makeText(applicationContext,applicationContext.getText(R.string.default_connection_error), Toast.LENGTH_SHORT).show()
+                }
             }
+        }
+        else{
+            if(!userList.isNullOrEmpty()){
+                updateRecycler()
+            }
+            Toast.makeText(applicationContext,R.string.no_internet, Toast.LENGTH_SHORT).show()
         }
     }
 
