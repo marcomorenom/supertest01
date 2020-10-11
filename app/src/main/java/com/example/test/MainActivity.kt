@@ -10,9 +10,10 @@ import com.example.utils.*
 
 open class MainActivity : AppCompatActivity()
 {
+
     /** CORE VARIABLES **/
     open var validUtils : Validations? = null
-
+    open var isBusy: Boolean = false
 //    LIFE CYCLE ACTIVITIES
     /**START LIFE CYCLE METHODS **/
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -102,7 +103,11 @@ open class MainActivity : AppCompatActivity()
     /**
      * VIEW METHODS
      */
-    open fun showLoader(){}
-    open fun hideLoader(){}
+    open fun showLoader(){
+        isBusy = true
+    }
+    open fun hideLoader(){
+        isBusy = false
+    }
 
 }

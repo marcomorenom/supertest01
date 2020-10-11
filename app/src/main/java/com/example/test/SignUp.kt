@@ -72,19 +72,23 @@ class SignUp : MainActivity() {
         })
         signBtn.setOnClickListener {
             showLoader()
-            if(validateInfo(showErrors = true)){
-                registerUser { user : UserRegisterModel? ->
-                    hideLoader()
-                    if(user!=null){
-                        Log.d(TAG, "register success!")
-                        saveUserOnPref(user)
-                        startActivity(Intent(applicationContext,Home::class.java))
-                        finishAffinity()
-                    }else{
-                        // show error!
-                        Toast.makeText(applicationContext,applicationContext.getText(R.string.default_connection_error), Toast.LENGTH_SHORT).show()
-                        Log.e(TAG, "register failed!")
+            if(!isBusy){
+                if(validateInfo(showErrors = true)){
+                    registerUser { user : UserRegisterModel? ->
+                        hideLoader()
+                        if(user!=null){
+                            Log.d(TAG, "register success!")
+                            saveUserOnPref(user)
+                            startActivity(Intent(applicationContext,Home::class.java))
+                            finishAffinity()
+                        }else{
+                            // show error!
+                            Toast.makeText(applicationContext,applicationContext.getText(R.string.default_connection_error), Toast.LENGTH_SHORT).show()
+                            Log.e(TAG, "register failed!")
+                        }
                     }
+                }else{
+                    hideLoader()
                 }
             }
         }
