@@ -10,4 +10,6 @@
     <string name="default_connection_error">Something is wrong!</string>
     <string name="default_invalid_field">Invalid Info!</string>
     <string name="sign_up_email">Email</string>
+    <string name="login_title">Login</string>
+    <string name="login_btn_text">Login</string>
 </resources>

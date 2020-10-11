@@ -1,11 +1,10 @@
-import com.example.models.UserModel
+import com.example.models.UserRegister
 import com.example.models.UserRegisterModel
 import com.google.gson.GsonBuilder
 
 import java.util.concurrent.TimeUnit
 
 import okhttp3.OkHttpClient
-import okhttp3.Request
 import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Response
@@ -48,9 +47,10 @@ interface APIInterface {
     @Headers("Content-Type: application/json")
     abstract fun registerUser(@Body requestJsonString: String): Call<UserRegisterModel>
     @POST("login")
-    abstract fun login(@Body body: RequestBody): Call<Response<UserModel>>
+    @Headers("Content-Type: application/json")
+    abstract fun login(@Body requestJsonString: String): Call<UserRegisterModel>
     @GET("users")
-    abstract fun getUsers(): Call<Response<ArrayList<UserModel>>>
+    abstract fun getUsers(): Call<Response<ArrayList<UserRegister>>>
     @GET("users")
-    abstract fun getUsersById(@Query("id") userID: String): Call<Response<UserModel>>
+    abstract fun getUsersById(@Query("id") userID: String): Call<Response<UserRegister>>
 }

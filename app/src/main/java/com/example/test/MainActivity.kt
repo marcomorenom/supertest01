@@ -1,5 +1,6 @@
 package com.example.test
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -41,26 +42,26 @@ open class MainActivity : AppCompatActivity()
     /**START LOGIC METHODS **/
     open fun initGlobalVariables() {
         Log.d(TAG_MainActivity,"initGlobalVariables")
-        validUtils = Validations()
 
     }
     open fun validateUser(){
-        validUtils?.let { validations ->
-            if(validations.isUserLogged()){
-                startApp(case = LOGIN_HOME_CASE)
-            }else {
-                if(isUserRegistered()){
-                    startApp(case = LOGIN_LOGIN_CASE)
-                }else{
-                    startApp(case = LOGIN_SIGN_UP_CASE)
-                }
-            }
-        }
-        if(validUtils == null){
-            //show error, somethings is wrong with credentials
-            logOut()
+        if(isUserLogged()){
+            startApp(case = LOGIN_HOME_CASE)
+        }else {
+            startApp(case = LOGIN_LOGIN_CASE)
         }
     }
+
+    private fun isUserLogged(): Boolean {
+        var result = true
+        val settings = applicationContext.getSharedPreferences("prefs", Context.MODE_PRIVATE)
+        val token = settings.getString("jwt","")
+        if(token.isNullOrEmpty()){
+            result = false
+        }
+        return result
+    }
+
     private fun isUserRegistered(): Boolean {
         return false
     }
@@ -69,14 +70,17 @@ open class MainActivity : AppCompatActivity()
             LOGIN_HOME_CASE -> {
                 Log.d(TAG_MainActivity,LOGIN_HOME_CASE)
                 startActivity(Intent(applicationContext, Home::class.java))
+                finishAffinity()
             }
             LOGIN_LOGIN_CASE -> {
                 Log.d(TAG_MainActivity,LOGIN_LOGIN_CASE)
                 startActivity(Intent(applicationContext, Login::class.java))
+                finishAffinity()
             }
             LOGIN_SIGN_UP_CASE -> {
                 Log.d(TAG_MainActivity,LOGIN_SIGN_UP_CASE)
                 startActivity(Intent(applicationContext, SignUp::class.java))
+                finishAffinity()
             }
             else -> { // Note the block
                 //show error, somethings is wrong with credentials

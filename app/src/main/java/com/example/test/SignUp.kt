@@ -19,7 +19,6 @@ class SignUp : MainActivity() {
     lateinit var pass: EditText
     lateinit var email: EditText
     lateinit var signBtn: Button
-    var isUserValidated = false
     private val TAG = "SignUp"
     private var passValue = ""
     private var emailValue = ""
