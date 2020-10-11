@@ -7,4 +7,7 @@
     <string name="sign_password">Password</string>
     <string name="sign_title">Sign-Up Process</string>
     <string name="sign_btn_text">Sign-up now</string>
+    <string name="default_connection_error">Something is wrong!</string>
+    <string name="default_invalid_field">Invalid Info!</string>
+    <string name="sign_up_email">Email</string>
 </resources>
