@@ -13,4 +13,6 @@
     <string name="login_title">Login</string>
     <string name="login_btn_text">Login</string>
     <string name="details_title">User</string>
+    <string name="home_title">Users</string>
+    <string name="logout_btn">Logout</string>
 </resources>

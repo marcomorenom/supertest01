@@ -7,6 +7,9 @@ public const val TAG_MainActivity  = "MainActivity"
 
 
 public val CONTENT_KEY = "itemContent"
+public val PREF_KEY = "prefs"
+public val TOKEN_KEY = "jwt"
+public val ID_KEY = "id"
 
 
 

@@ -54,8 +54,8 @@ open class MainActivity : AppCompatActivity()
 
     private fun isUserLogged(): Boolean {
         var result = true
-        val settings = applicationContext.getSharedPreferences("prefs", Context.MODE_PRIVATE)
-        val token = settings.getString("jwt","")
+        val settings = applicationContext.getSharedPreferences(PREF_KEY, Context.MODE_PRIVATE)
+        val token = settings.getString(TOKEN_KEY,"")
         if(token.isNullOrEmpty()){
             result = false
         }
@@ -90,6 +90,10 @@ open class MainActivity : AppCompatActivity()
         }
     }
     open fun logOut(){
+        val settings = applicationContext.getSharedPreferences(PREF_KEY, Context.MODE_PRIVATE)
+        settings.edit().clear().apply()
+        startActivity(Intent(applicationContext, Login::class.java))
+        finishAffinity()
 
     }
     open fun initListeners() {}

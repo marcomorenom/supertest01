@@ -11,6 +11,9 @@ import android.widget.EditText
 import android.widget.Toast
 import com.example.models.UserRegisterModel
 import com.example.repositories.LoginRepo
+import com.example.utils.ID_KEY
+import com.example.utils.PREF_KEY
+import com.example.utils.TOKEN_KEY
 
 class Login : MainActivity() {
 
@@ -82,9 +85,9 @@ class Login : MainActivity() {
     }
 
     private fun saveUserOnPref(userRegister: UserRegisterModel) {
-        val settings = applicationContext.getSharedPreferences("prefs", Context.MODE_PRIVATE)
-        settings.edit().putString("id", userRegister.id).apply()
-        settings.edit().putString("jwt", userRegister.jwt).apply()
+        val settings = applicationContext.getSharedPreferences(PREF_KEY, Context.MODE_PRIVATE)
+        settings.edit().putString(ID_KEY, userRegister.id).apply()
+        settings.edit().putString(TOKEN_KEY, userRegister.jwt).apply()
     }
 
     private fun validateInfo(showErrors : Boolean) : Boolean {
