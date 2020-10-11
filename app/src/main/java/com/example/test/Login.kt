@@ -14,6 +14,7 @@ import com.example.repositories.LoginRepo
 import com.example.utils.ID_KEY
 import com.example.utils.PREF_KEY
 import com.example.utils.TOKEN_KEY
+import com.example.utils.Validations
 
 class Login : MainActivity() {
 
@@ -106,6 +107,13 @@ class Login : MainActivity() {
                 email.error = applicationContext.getText(R.string.default_invalid_field)
             }
             isValid = false
+        }else{
+            if(!Validations().isValidEmail(emailValue)){
+                if(showErrors){
+                    email.error = applicationContext.getText(R.string.invalid_email)
+                }
+                isValid = false
+            }
         }
         if(!isValid && showErrors){
             Toast.makeText(applicationContext, applicationContext.getText(R.string.default_invalid_field), Toast.LENGTH_SHORT).show()

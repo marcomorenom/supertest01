@@ -17,4 +17,5 @@
     <string name="logout_btn">Logout</string>
     <string name="login_error">Invalid credentials</string>
     <string name="sign_up_error">Can\'t create new user. Please check your information</string>
+    <string name="invalid_email">Invalid email</string>
 </resources>
