@@ -15,4 +15,6 @@
     <string name="details_title">User</string>
     <string name="home_title">Users</string>
     <string name="logout_btn">Logout</string>
+    <string name="login_error">Invalid credentials</string>
+    <string name="sign_up_error">Can\'t create new user. Please check your information</string>
 </resources>

@@ -42,6 +42,7 @@ open class MainActivity : AppCompatActivity()
 
     /**START LOGIC METHODS **/
     open fun initGlobalVariables() {
+        isBusy = false
         Log.d(TAG_MainActivity,"initGlobalVariables")
 
     }

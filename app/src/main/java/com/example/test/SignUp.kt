@@ -71,8 +71,8 @@ class SignUp : MainActivity() {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
         })
         signBtn.setOnClickListener {
-            showLoader()
             if(!isBusy){
+                showLoader()
                 if(validateInfo(showErrors = true)){
                     registerUser { user : UserRegisterModel? ->
                         hideLoader()
@@ -83,7 +83,7 @@ class SignUp : MainActivity() {
                             finishAffinity()
                         }else{
                             // show error!
-                            Toast.makeText(applicationContext,applicationContext.getText(R.string.default_connection_error), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext,applicationContext.getText(R.string.sign_up_error), Toast.LENGTH_SHORT).show()
                             Log.e(TAG, "register failed!")
                         }
                     }
@@ -106,24 +106,25 @@ class SignUp : MainActivity() {
         if(passValue.isEmpty()){
             if(showErrors){
                 pass.error = applicationContext.getText(R.string.default_invalid_field)
-                Toast.makeText(applicationContext, applicationContext.getText(R.string.default_invalid_field), Toast.LENGTH_SHORT).show()
             }
             isValid = false
         }
         if(userValue.isEmpty()){
             if(showErrors){
                 userName.error = applicationContext.getText(R.string.default_invalid_field)
-                Toast.makeText(applicationContext, applicationContext.getText(R.string.default_invalid_field), Toast.LENGTH_SHORT).show()
             }
             isValid = false
         }
         if(emailValue.isEmpty()){
             if(showErrors){
                 email.error = applicationContext.getText(R.string.default_invalid_field)
-                Toast.makeText(applicationContext, applicationContext.getText(R.string.default_invalid_field), Toast.LENGTH_SHORT).show()
             }
             isValid = false
         }
+        if(!isValid && showErrors){
+            Toast.makeText(applicationContext, applicationContext.getText(R.string.default_invalid_field), Toast.LENGTH_SHORT).show()
+        }
+
         return isValid
     }
 

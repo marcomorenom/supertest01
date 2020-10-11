@@ -76,7 +76,7 @@ class Login : MainActivity() {
                             finishAffinity()
                         }else{
                             // show error!
-                            Toast.makeText(applicationContext,applicationContext.getText(R.string.default_connection_error), Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext,applicationContext.getText(R.string.login_error), Toast.LENGTH_SHORT).show()
                             Log.e(TAG, "register failed!")
                         }
                     }
@@ -98,17 +98,19 @@ class Login : MainActivity() {
         if(passValue.isEmpty()){
             if(showErrors){
                 pass.error = applicationContext.getText(R.string.default_invalid_field)
-                Toast.makeText(applicationContext, applicationContext.getText(R.string.default_invalid_field), Toast.LENGTH_SHORT).show()
             }
             isValid = false
         }
         if(emailValue.isEmpty()){
             if(showErrors){
                 email.error = applicationContext.getText(R.string.default_invalid_field)
-                Toast.makeText(applicationContext, applicationContext.getText(R.string.default_invalid_field), Toast.LENGTH_SHORT).show()
             }
             isValid = false
         }
+        if(!isValid && showErrors){
+            Toast.makeText(applicationContext, applicationContext.getText(R.string.default_invalid_field), Toast.LENGTH_SHORT).show()
+        }
+
         return isValid
     }
 
