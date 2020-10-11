@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.models.UserItem
 import com.example.test.R
 
-class SimpleAdapter(private val context: Context, private var items: ArrayList<Any>?, private val listener : OnItemClicked): RecyclerView.Adapter<ViewHolder>() {
+class SimpleAdapter(private val context: Context, private var items: ArrayList<UserItem>??, private val listener : OnItemClicked): RecyclerView.Adapter<ViewHolder>() {
 
     interface OnItemClicked{
         fun onItemClicked(item : Any?)
@@ -20,8 +21,8 @@ class SimpleAdapter(private val context: Context, private var items: ArrayList<A
         items?.let { _items->
             if(_items.isNotEmpty()){
                 _items[position].let { item ->
-                    holder.title.text = item as CharSequence?
-                    holder.subtitle.text = item as CharSequence?
+                    holder.title.text = item.username
+                    holder.subtitle.text = item.email
                 }
             }
         }
@@ -32,7 +33,7 @@ class SimpleAdapter(private val context: Context, private var items: ArrayList<A
         holder.subtitle.text = context.getText(R.string.default_long_text_lorem_ipsum)
     }
 
-    fun updateData(items : ArrayList<Any>?) {
+    fun updateData(items : ArrayList<UserItem>??) {
         if(items!=null){
             this.items = items
         }
@@ -44,8 +45,7 @@ class SimpleAdapter(private val context: Context, private var items: ArrayList<A
 
     override fun getItemCount(): Int {
         items?.let {
-//            return it.count()
-            return 5
+            return it.count()
         }
         return 0
     }}

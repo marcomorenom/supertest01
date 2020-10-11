@@ -1,3 +1,4 @@
+import com.example.models.UserListResponse
 import com.example.models.UserRegister
 import com.example.models.UserRegisterModel
 import com.google.gson.GsonBuilder
@@ -50,7 +51,8 @@ interface APIInterface {
     @Headers("Content-Type: application/json")
     abstract fun login(@Body requestJsonString: String): Call<UserRegisterModel>
     @GET("users")
-    abstract fun getUsers(): Call<Response<ArrayList<UserRegister>>>
+    @Headers("Content-Type: application/json")
+    abstract fun getUsers(): Call<UserListResponse>
     @GET("users")
     abstract fun getUsersById(@Query("id") userID: String): Call<Response<UserRegister>>
 }

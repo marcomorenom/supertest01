@@ -5,17 +5,35 @@ import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.adapters.SimpleAdapter
+import com.example.models.UserItem
+import com.example.repositories.HomeRepo
 
 class Home : MainActivity(), SimpleAdapter.OnItemClicked {
 
     lateinit var recycler: RecyclerView
     lateinit var adapter: com.example.adapters.SimpleAdapter
-
+    var userList: ArrayList<UserItem>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
     }
+
+    override fun onResume() {
+        super.onResume()
+        HomeRepo(applicationContext.getString(R.string.SERVER_URL)).getUserList { list ->
+            if(!list.isNullOrEmpty()){
+                userList = list
+                updateRecycler()
+            }
+        }
+    }
+
+    private fun updateRecycler() {
+        adapter.updateData(userList)
+        adapter.notifyDataSetChanged()
+    }
+
     override fun initGlobalVariables() {
         super.initGlobalVariables()
         recycler =  findViewById(R.id.recycler)
