@@ -13,7 +13,7 @@ import com.example.test.R
 class SimpleAdapter(private val context: Context, private var items: ArrayList<UserItem>??, private val listener : OnItemClicked): RecyclerView.Adapter<ViewHolder>() {
 
     interface OnItemClicked{
-        fun onItemClicked(item : Any?)
+        fun onItemClicked(item : UserItem?)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -21,6 +21,9 @@ class SimpleAdapter(private val context: Context, private var items: ArrayList<U
         items?.let { _items->
             if(_items.isNotEmpty()){
                 _items[position].let { item ->
+                    holder.itemView.setOnClickListener {
+                        listener.onItemClicked(item)
+                    }
                     holder.title.text = item.username
                     holder.subtitle.text = item.email
                 }
@@ -40,7 +43,7 @@ class SimpleAdapter(private val context: Context, private var items: ArrayList<U
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.card_view_home, parent, false)
-        return ViewHolder(v, this.listener)
+        return ViewHolder(v)
     }
 
     override fun getItemCount(): Int {
@@ -50,12 +53,7 @@ class SimpleAdapter(private val context: Context, private var items: ArrayList<U
         return 0
     }}
 
- class ViewHolder(holder: View, listener : SimpleAdapter.OnItemClicked) : RecyclerView.ViewHolder(holder) {
+ class ViewHolder(holder: View) : RecyclerView.ViewHolder(holder) {
      var title: TextView = holder.findViewById(R.id.title)
      var subtitle: TextView = holder.findViewById(R.id.subtitle)
-     init {
-         holder.setOnClickListener {
-             listener.onItemClicked(null)
-         }
-     }
 }

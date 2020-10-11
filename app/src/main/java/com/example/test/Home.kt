@@ -2,14 +2,16 @@ package com.example.test
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.adapters.SimpleAdapter
 import com.example.models.UserItem
 import com.example.repositories.HomeRepo
+import com.example.utils.CONTENT_KEY
+import com.google.gson.Gson
 
 class Home : MainActivity(), SimpleAdapter.OnItemClicked {
-
     lateinit var recycler: RecyclerView
     lateinit var adapter: com.example.adapters.SimpleAdapter
     var userList: ArrayList<UserItem>? = null
@@ -25,6 +27,8 @@ class Home : MainActivity(), SimpleAdapter.OnItemClicked {
             if(!list.isNullOrEmpty()){
                 userList = list
                 updateRecycler()
+            }else {
+                Toast.makeText(applicationContext,applicationContext.getText(R.string.default_connection_error), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -49,8 +53,12 @@ class Home : MainActivity(), SimpleAdapter.OnItemClicked {
 //        super.validateUser()
     }
 
-    override fun onItemClicked(item: Any?) {
+    override fun onItemClicked(item: UserItem?) {
         //validate item first
-        startActivity(Intent(applicationContext, Details::class.java))
+        item?.let {
+            val intent = Intent(applicationContext, Details::class.java)
+            intent.putExtra(CONTENT_KEY, Gson().toJson(item))
+            startActivity(intent)
+        }
     }
 }

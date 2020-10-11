@@ -6,3 +6,7 @@ public const val LOGIN_SIGN_UP_CASE = "signUp"
 public const val TAG_MainActivity  = "MainActivity"
 
 
+public val CONTENT_KEY = "itemContent"
+
+
+
